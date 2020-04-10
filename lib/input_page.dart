@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
@@ -142,7 +143,11 @@ class _InputPageState extends State<InputPage> {
                                 icon: FontAwesomeIcons.minus,
                                 onPressed: () {
                                   setState(() {
-                                    weight--;
+                                    if (weight <= 0) {
+                                      weight = 0;
+                                    } else {
+                                      weight--;
+                                    }
                                   });
                                 }),
                             SizedBox(width: 10.0),
@@ -181,7 +186,11 @@ class _InputPageState extends State<InputPage> {
                                 icon: FontAwesomeIcons.minus,
                                 onPressed: () {
                                   setState(() {
-                                    age--;
+                                    if (age <= 0) {
+                                      age = 0;
+                                    } else {
+                                      age--;
+                                    }
                                   });
                                 }),
                             SizedBox(width: 10.0),
@@ -202,11 +211,30 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColour,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(),
+                ),
+              );
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: kLargeButtonTextStyle,
+                ),
+              ),
+              padding: EdgeInsets.only(
+                bottom: 20.0,
+              ),
+              color: kBottomContainerColour,
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+            ),
           ),
         ],
       ),
